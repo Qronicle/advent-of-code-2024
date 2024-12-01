@@ -8,12 +8,7 @@ class Day01 extends AbstractSolution
 {
     protected function solvePart1(): int
     {
-        $ids = [];
-        foreach ($this->getInputLines() as $line) {
-            $newIds = explode('   ', $line);
-            $ids[0][] = (int) $newIds[0];
-            $ids[1][] = (int) $newIds[1];
-        }
+        $ids = $this->getIds();
         sort($ids[0]);
         sort($ids[1]);
         $dist = 0;
@@ -23,8 +18,28 @@ class Day01 extends AbstractSolution
         return $dist;
     }
 
-    protected function solvePart2(): string
+    protected function solvePart2(): int
     {
-        return ':(';
+        [$list1, $list2] = $this->getIds();
+        $list2Counts = [];
+        foreach ($list2 as $num) {
+            $list2Counts[$num] = isset($list2Counts[$num]) ? $list2Counts[$num] + 1 : 1;
+        }
+        $total = 0;
+        foreach ($list1 as $num) {
+            $total += $num * ($list2Counts[$num] ?? 0);
+        }
+        return $total;
+    }
+
+    protected function getIds(): array
+    {
+        $ids = [];
+        foreach ($this->getInputLines() as $line) {
+            $newIds = explode('   ', $line);
+            $ids[0][] = (int) $newIds[0];
+            $ids[1][] = (int) $newIds[1];
+        }
+        return $ids;
     }
 }
