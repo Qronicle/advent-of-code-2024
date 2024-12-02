@@ -44,11 +44,10 @@ class Day02 extends AbstractSolution
                     }
                     return false;
                 } else {
-                    $safe = false;
-                    break;
+                    return false;
                 }
             }
         }
-        return $safe;
+        return true;
     }
 }
