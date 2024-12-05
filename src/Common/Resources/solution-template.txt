@@ -6,12 +6,12 @@ use AdventOfCode\Common\Solution\AbstractSolution;
 
 class Day{{day_nr}} extends AbstractSolution
 {
-    protected function solvePart1(): string
+    protected function solvePart1(): int
     {
         return ':(';
     }
 
-    protected function solvePart2(): string
+    protected function solvePart2(): int
     {
         return ':(';
     }
