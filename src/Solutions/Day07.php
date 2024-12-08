@@ -12,20 +12,21 @@ class Day07 extends AbstractSolution
         foreach ($this->getInputLines() as $line) {
             [$target, $n] = explode(': ', $line);
             $target = (int) $target;
-            $numbers = array_map('intval', explode(' ', $n));
-            $solutions = [array_shift($numbers) => true];
+            $numbers = array_map('intval', array_reverse(explode(' ', $n)));
+            $solutions = [$target => true];
             foreach ($numbers as $number) {
                 $newSolutions = [];
                 foreach ($solutions as $solution => $tmp) {
-                    if ($solution > $target) {
-                        continue;
+                    if (($add = $solution - $number) >= 0) {
+                        $newSolutions[$add] = true;
                     }
-                    $newSolutions[$solution + $number] = true;
-                    $newSolutions[$solution * $number] = true;
+                    if ($solution % $number === 0) {
+                        $newSolutions[$solution / $number] = true;
+                    }
                 }
                 $solutions = $newSolutions;
             }
-            if (isset($solutions[$target])) {
+            if (isset($solutions[0])) {
                 $total += $target;
             }
         }
@@ -38,21 +39,24 @@ class Day07 extends AbstractSolution
         foreach ($this->getInputLines() as $line) {
             [$target, $n] = explode(': ', $line);
             $target = (int) $target;
-            $numbers = array_map('intval', explode(' ', $n));
-            $solutions = [array_shift($numbers) => true];
+            $numbers = array_map('intval', array_reverse(explode(' ', $n)));
+            $solutions = [$target => true];
             foreach ($numbers as $number) {
                 $newSolutions = [];
                 foreach ($solutions as $solution => $tmp) {
-                    if ($solution > $target) {
-                        continue;
+                    if (($add = $solution - $number) >= 0) {
+                        $newSolutions[$add] = true;
                     }
-                    $newSolutions[$solution + $number] = true;
-                    $newSolutions[$solution * $number] = true;
-                    $newSolutions[$solution . $number] = true;
+                    if ($solution % $number === 0) {
+                        $newSolutions[$solution / $number] = true;
+                    }
+                    if (str_ends_with($solution, $number)) {
+                        $newSolutions[substr($solution, 0, -strlen($number)) ?: 0] = true;
+                    }
                 }
                 $solutions = $newSolutions;
             }
-            if (isset($solutions[$target])) {
+            if (isset($solutions[0])) {
                 $total += $target;
             }
         }
