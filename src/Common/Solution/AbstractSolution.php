@@ -30,9 +30,21 @@ abstract class AbstractSolution
         return explode("\n", $this->rawInput);
     }
 
+    /**
+     * @return array<int, array<int, string>>
+     */
     protected function getInputMap(?string $input = null): array
     {
         $input ??= $this->rawInput;
         return array_map(fn (string $val) => str_split($val), explode("\n", $input));
+    }
+
+    /**
+     * @return array<int, array<int, int>>
+     */
+    protected function getIntInputMap(?string $input = null): array
+    {
+        $input ??= $this->rawInput;
+        return array_map(fn (string $val) => array_map('intval', str_split($val)), explode("\n", $input));
     }
 }
