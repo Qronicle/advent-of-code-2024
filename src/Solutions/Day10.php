@@ -42,41 +42,45 @@ class Day10 extends AbstractSolution
         return count($points);
     }
 
-//    protected function findTrails(array $map, array $startPoint, array &$trails): int
-//    {
-//        $routes = [[$startPoint]];
-//        $nextHeight = 0;
-//        $numRoutes = 0;
-//        while (++$nextHeight < 10 && $routes) {
-//            $newRoutes = [];
-//            foreach ($routes as $route) {
-//                foreach (self::$dirs as $dir) {
-//                    $nextX = $route[0][0] + $dir[0];
-//                    $nextY = $route[0][1] + $dir[1];
-//                    if (($map[$nextY][$nextX] ?? -1) !== $nextHeight) {
-//                        continue;
-//                    }
-//                    if (isset($trails[$nextY][$nextX])) {
-//                        $numRoutes += $trails[$nextY][$nextX];
-//                        continue;
-//                    }
-//                    $newRoutes[] = [[$nextX, $nextY], ...$route];
-//                }
-//            }
-//            $routes = $newRoutes;
-//        }
-//        foreach ($routes as $route) {
-//            $route = array_reverse($route);
-//            foreach ($route as $i => $point) {
-//                echo ($i ? ' - ' : '') . $point[0] . ',' . $point[1];
-//            }
-//            echo "\n";
-//        }
-//        die;
-//    }
-
     protected function solvePart2(): int
     {
-        return ':(';
+        $map = $this->getIntInputMap();
+        $total = 0;
+        foreach ($map as $y => $row) {
+            foreach ($row as $x => $height) {
+                if ($height === 0) {
+                    $total += $this->findTrailsXxl($map, [$x, $y]);
+                }
+            }
+        }
+        return $total;
+    }
+
+    protected function findTrailsXxl(array $map, array $startPoint): int
+    {
+        $routes = [[...$startPoint, 1]];
+        $nextHeight = 0;
+        while (++$nextHeight < 10 && $routes) {
+            $newRoutes = [];
+            foreach ($routes as $route) {
+                foreach (self::$dirs as $dir) {
+                    $x = $route[0] + $dir[0];
+                    $y = $route[1] + $dir[1];
+                    if (($map[$y][$x] ?? -1) === $nextHeight) {
+                        if (isset($newRoutes["$x,$y"])) {
+                            $newRoutes["$x,$y"][2] += $route[2];
+                        } else {
+                            $newRoutes["$x,$y"] = [$x, $y, $route[2]];
+                        }
+                    }
+                }
+            }
+            $routes = $newRoutes;
+        }
+        $total = 0;
+        foreach ($routes as $route) {
+            $total += $route[2];
+        }
+        return $total;
     }
 }
