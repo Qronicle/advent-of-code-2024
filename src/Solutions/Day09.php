@@ -53,46 +53,49 @@ class Day09 extends AbstractSolution
 
     protected function solvePart2(): int
     {
-        $input = $this->rawInput; // '2333133121414131402';
+        $input = $this->rawInput;
+        // $input = '2333133121414131402';
         $map = str_split($input);
         $id = 0;
         /** @var Part[] $parts */
         $parts = [];
+        $prev = null;
         for ($i = 0; $i < count($map); $i += 2) {
-            $parts[] = new Part($id++, $map[$i], $map[$i+1] ?? 0);
+            $part =  new Part($id++, $map[$i], $map[$i+1] ?? 0, $prev);
+            $parts[] = $part;
+            if ($prev) {
+                $prev->next = $part;
+            }
+            $prev = $part;
         }
 
         $compressed = $parts;
+        $firstPart = $compressed[0];
         for ($p = count($parts) - 1; $p > 0; --$p) {
             $part = $parts[$p];
-            $moved = false;
-            for ($tp = 0; $tp < count($compressed); ++$tp) {
-                $targetPart = $compressed[$tp];
+            $targetPart = $firstPart;
+            while ($targetPart) {
                 if ($targetPart === $part) {
-                    if ($moved !== false) {
-                        $compressed[$tp - 1]->space += $part->length + $moved;
-                        array_splice($compressed, $tp, 1);
-                    }
                     break;
                 }
-                if ($moved === false && $part->length <= $targetPart->space) {
-                    $moved = $part->space;
-                    $part->space = $targetPart->space - $part->length;
-                    $targetPart->space = 0;
-                    array_splice($compressed, $tp + 1, 0, [$part]);
-                    ++$tp;
+                if ($part->length <= $targetPart->space) {
+                    $part->appendTo($targetPart);
+                    break;
                 }
+                $targetPart = $targetPart->next;
             }
         }
 
         $checksum = 0;
         $position = 0;
-        foreach ($compressed as $part) {
+        $part = $firstPart;
+        while ($part) {
             $endPos = $position + $part->length;
             for (; $position < $endPos; ++$position) {
                 $checksum += $position * $part->id;
             }
             $position += $part->space;
+            $part = $part->next;
         }
         return $checksum;
     }
@@ -112,6 +115,26 @@ class Part
         public int $id,
         public int $length,
         public int $space,
+        public ?Part $prev = null,
+        public ?Part $next = null,
     ) {
+    }
+
+    public function appendTo(Part $target): void
+    {
+        assert($this->prev !== null && $target->next !== null);
+        $this->prev->space += $this->length + $this->space;
+        $this->space = $target->space - $this->length;
+        $target->space = 0;
+        // Fix linked list from
+        $this->prev->next = $this->next;
+        if ($this->next) {
+            $this->next->prev = $this->prev;
+        }
+        // Fix linked list to
+        $this->next = $target->next;
+        $target->next->prev = $this;
+        $target->next = $this;
+        $this->prev = $target;
     }
 }
