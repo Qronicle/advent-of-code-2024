@@ -47,4 +47,22 @@ abstract class AbstractSolution
         $input ??= $this->rawInput;
         return array_map(fn (string $val) => array_map('intval', str_split($val)), explode("\n", $input));
     }
+
+    public function getOutputPath(string|int|null $filename = null, int $pad = 5, string $ext = 'png'): string
+    {
+        $path = BASE_DIR . '/var/out/day' . static::getDay();
+        if ($filename === null) {
+            return $path;
+        }
+        if (is_int($filename)) {
+            $filename = str_pad($filename, $pad, '0', STR_PAD_LEFT) . ".$ext";
+        }
+        return "$path/$filename";
+    }
+
+    public static function getDay(): int
+    {
+        $end = substr(static::class, -2);
+        return (int) (is_numeric($end) ? $end : substr($end, 1));
+    }
 }

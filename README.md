@@ -17,7 +17,8 @@
 | 11        | 0.00119 sec<br>0.05 MB | 0.05634 sec<br>0.39 MB  | 0.05753 sec<br>0.44 MB  |
 | 12        | 0.01912 sec<br>2.11 MB | 0.02305 sec<br>2.13 MB  | 0.04217 sec<br>4.24 MB  |
 | 13        | 0.00077 sec<br>0.04 MB | 0.00076 sec<br>0.04 MB  | 0.00153 sec<br>0.08 MB  |
-| **TOTAL** | 0.14702 sec<br>7.38 MB | 2.79027 sec<br>12.23 MB | 2.93729 sec<br>19.61 MB |
+| 14        | 0.00066 sec<br>0.04 MB | 1.52412 sec<br>0.37 MB  | 1.52478 sec<br>0.41 MB  |
+| **TOTAL** | 0.14768 sec<br>7.42 MB | 4.31439 sec<br>12.60 MB | 4.46207 sec<br>20.02 MB |
 
 ## Usage
 
