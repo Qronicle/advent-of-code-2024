@@ -40,6 +40,25 @@ abstract class AbstractSolution
     }
 
     /**
+     * @return array{0: array<int, array<int, string>>, 1: ?int[]>
+     */
+    protected function getInputMapAndPosition(string $search, ?string $input = null): array
+    {
+        $input ??= $this->rawInput;
+        $map = [];
+        $position = null;
+        foreach (explode("\n", $input) as $y => $row) {
+            foreach (str_split($row) as $x => $val) {
+                $map[$y][$x] = $val;
+                if ($val === $search) {
+                    $position = [$x, $y];
+                }
+            }
+        }
+        return [$map, $position];
+    }
+
+    /**
      * @return array<int, array<int, int>>
      */
     protected function getIntInputMap(?string $input = null): array

@@ -17,7 +17,7 @@ class TextOutput
         $output = '';
         foreach ($map as $row) {
             foreach ($row as $val) {
-                $output .= is_string($val) ? $val : ($val ? '.' : '#');
+                $output .= is_string($val) ? $val : (is_int($val) ? $val % 10 : ($val ? '.' : '#'));
             }
             $output .= "\n";
         }
