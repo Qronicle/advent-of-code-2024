@@ -26,8 +26,8 @@ class Image
             $this->image,
             round($x),
             round($y),
-            min($this->width, round($x) + round($width)),
-            min($this->height, round($y) + round($height)),
+            round($x) + round($width) - 1,
+            round($y) + round($height) - 1,
             $this->getGdColor($fill),
         );
         if (!$r) {
@@ -38,6 +38,9 @@ class Image
 
     public function png(string $path): static
     {
+        if (!file_exists(dirname($path))) {
+            mkdir(dirname($path), recursive: true);
+        }
         imagepng($this->image, $path);
         return $this;
     }

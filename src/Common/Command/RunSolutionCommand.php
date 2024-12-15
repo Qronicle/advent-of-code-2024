@@ -28,9 +28,7 @@ class RunSolutionCommand extends Command
         $part = $dayParts[1] ?? 1;
         if ($day < 1 || $day > 25) {
             $output->writeln('<error>Day needs to be a value of 1 to 25');
-        }
-        if ($part < 1 || $part > 2) {
-            $output->writeln('<error>Part needs to be a value of 1 or 2');
+            return Command::INVALID;
         }
         $paddedDay = str_pad($day, 2, '0', STR_PAD_LEFT);
 
@@ -42,7 +40,22 @@ class RunSolutionCommand extends Command
         assert($solver instanceof AbstractSolution);
 
         $solution = new SolutionDto();
-        $solution->solve($solver->solve($part, $inputContents));
+        if (is_numeric($part)) {
+            if ($part < 1 || $part > 2) {
+                $output->writeln('<error>Part needs to be a value of 1 or 2');
+                return Command::INVALID;
+            }
+            $solution->solve($solver->solve($part, $inputContents));
+        } else {
+            if (method_exists($solver, $part)) {
+                $solver->$part($inputContents);
+                $output->writeln('<info>Done.</info>');
+                return Command::SUCCESS;
+            } else {
+                $output->writeln("<error>Could not run '$part'.</error>");
+                return Command::INVALID;
+            }
+        }
 
         $output->writeln('<info>Solution:</info>');
         $output->writeln($solution->result);

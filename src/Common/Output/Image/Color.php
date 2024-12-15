@@ -23,7 +23,20 @@ class Color
 
     public static function hex(string $hexCode): static
     {
+        if (strlen($hexCode) === 4) {
+            $hexCode = $hexCode[0] . $hexCode[1] . $hexCode[1] . $hexCode[2] . $hexCode[2] . $hexCode[3] . $hexCode[3];
+        }
         [$r, $g, $b] = sscanf($hexCode, "#%02x%02x%02x");
         return new Color($r, $g, $b);
+    }
+
+    public static function white(): static
+    {
+        return new Color(255, 255, 255);
+    }
+
+    public static function black(): static
+    {
+        return new Color(0, 0, 0);
     }
 }
