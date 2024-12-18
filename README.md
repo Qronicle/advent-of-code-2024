@@ -2,24 +2,25 @@
 
 ## Benchmarks
 
-| Day       | Part 1                 | Part 2                  | Total                   |
-| :-------: | ---------------------: | ----------------------: | ----------------------: |
-| 1         | 0.00059 sec<br>0.10 MB | 0.00034 sec<br>0.10 MB  | 0.00093 sec<br>0.20 MB  |
-| 2         | 0.00110 sec<br>0.06 MB | 0.00264 sec<br>0.06 MB  | 0.00374 sec<br>0.12 MB  |
-| 3         | 0.00013 sec<br>0.13 MB | 0.00014 sec<br>0.18 MB  | 0.00027 sec<br>0.31 MB  |
-| 4         | 0.00587 sec<br>1.74 MB | 0.00171 sec<br>1.74 MB  | 0.00758 sec<br>3.48 MB  |
-| 5         | 0.00162 sec<br>0.23 MB | 0.00288 sec<br>0.23 MB  | 0.00450 sec<br>0.46 MB  |
-| 6         | 0.00103 sec<br>1.57 MB | 0.57224 sec<br>4.13 MB  | 0.57327 sec<br>5.70 MB  |
-| 7         | 0.00350 sec<br>0.07 MB | 0.00972 sec<br>0.10 MB  | 0.01322 sec<br>0.17 MB  |
-| 8         | 0.00053 sec<br>0.10 MB | 0.00093 sec<br>0.21 MB  | 0.00146 sec<br>0.31 MB  |
-| 9         | 0.10969 sec<br>1.11 MB | 2.11735 sec<br>2.85 MB  | 2.22704 sec<br>3.96 MB  |
-| 10        | 0.00188 sec<br>0.07 MB | 0.00217 sec<br>0.07 MB  | 0.00405 sec<br>0.14 MB  |
-| 11        | 0.00119 sec<br>0.05 MB | 0.05634 sec<br>0.39 MB  | 0.05753 sec<br>0.44 MB  |
-| 12        | 0.01912 sec<br>2.11 MB | 0.02305 sec<br>2.13 MB  | 0.04217 sec<br>4.24 MB  |
-| 13        | 0.00077 sec<br>0.04 MB | 0.00076 sec<br>0.04 MB  | 0.00153 sec<br>0.08 MB  |
-| 14        | 0.00066 sec<br>0.04 MB | 1.52412 sec<br>0.37 MB  | 1.52478 sec<br>0.41 MB  |
-| 15        | 0.00439 sec<br>1.28 MB | 0.00631 sec<br>1.40 MB  | 0.01070 sec<br>2.68 MB  |
-| **TOTAL** | 0.15207 sec<br>8.70 MB | 4.32070 sec<br>14.00 MB | 4.47277 sec<br>22.70 MB |
+| Day       | Part 1                  | Part 2                  | Total                   |
+| :-------: | ----------------------: | ----------------------: | ----------------------: |
+| 1         | 0.00059 sec<br>0.10 MB  | 0.00034 sec<br>0.10 MB  | 0.00093 sec<br>0.20 MB  |
+| 2         | 0.00110 sec<br>0.06 MB  | 0.00264 sec<br>0.06 MB  | 0.00374 sec<br>0.12 MB  |
+| 3         | 0.00013 sec<br>0.13 MB  | 0.00014 sec<br>0.18 MB  | 0.00027 sec<br>0.31 MB  |
+| 4         | 0.00587 sec<br>1.74 MB  | 0.00171 sec<br>1.74 MB  | 0.00758 sec<br>3.48 MB  |
+| 5         | 0.00162 sec<br>0.23 MB  | 0.00288 sec<br>0.23 MB  | 0.00450 sec<br>0.46 MB  |
+| 6         | 0.00103 sec<br>1.57 MB  | 0.57224 sec<br>4.13 MB  | 0.57327 sec<br>5.70 MB  |
+| 7         | 0.00350 sec<br>0.07 MB  | 0.00972 sec<br>0.10 MB  | 0.01322 sec<br>0.17 MB  |
+| 8         | 0.00053 sec<br>0.10 MB  | 0.00093 sec<br>0.21 MB  | 0.00146 sec<br>0.31 MB  |
+| 9         | 0.10969 sec<br>1.11 MB  | 2.11735 sec<br>2.85 MB  | 2.22704 sec<br>3.96 MB  |
+| 10        | 0.00188 sec<br>0.07 MB  | 0.00217 sec<br>0.07 MB  | 0.00405 sec<br>0.14 MB  |
+| 11        | 0.00119 sec<br>0.05 MB  | 0.05634 sec<br>0.39 MB  | 0.05753 sec<br>0.44 MB  |
+| 12        | 0.01912 sec<br>2.11 MB  | 0.02305 sec<br>2.13 MB  | 0.04217 sec<br>4.24 MB  |
+| 13        | 0.00077 sec<br>0.04 MB  | 0.00076 sec<br>0.04 MB  | 0.00153 sec<br>0.08 MB  |
+| 14        | 0.00066 sec<br>0.04 MB  | 1.52412 sec<br>0.37 MB  | 1.52478 sec<br>0.41 MB  |
+| 15        | 0.00439 sec<br>1.28 MB  | 0.00631 sec<br>1.40 MB  | 0.01070 sec<br>2.68 MB  |
+| 16        | 0.03519 sec<br>4.31 MB  | 0.14220 sec<br>27.34 MB | 0.17739 sec<br>31.65 MB |
+| **TOTAL** | 0.18726 sec<br>13.01 MB | 4.46290 sec<br>41.34 MB | 4.65016 sec<br>54.35 MB |
 
 ## Usage
 
