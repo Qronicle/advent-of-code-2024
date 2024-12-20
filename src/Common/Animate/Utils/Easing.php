@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode\Common\Animate;
+namespace AdventOfCode\Common\Animate\Utils;
 
 enum Easing
 {

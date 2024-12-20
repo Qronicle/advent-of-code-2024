@@ -1,7 +1,8 @@
 <?php
 
-namespace AdventOfCode\Common\Animate\DisplayObject;
+namespace AdventOfCode\Common\Animate\DisplayObject\Common;
 
+use AdventOfCode\Common\Animate\Utils\Transform;
 use AdventOfCode\Common\Output\Image\Image;
 
 interface DisplayObject
@@ -18,5 +19,7 @@ interface DisplayObject
      */
     public function setId(int|string $id): static;
 
-    public function render(Image $image, int $scale): void;
+    public function transform(): Transform;
+
+    public function render(Image $image, Transform $transform): void;
 }

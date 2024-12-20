@@ -2,9 +2,10 @@
 
 namespace AdventOfCode\Solutions;
 
+use AdventOfCode\Common\Animate\DisplayObject\Group;
 use AdventOfCode\Common\Animate\DisplayObject\Rectangle;
-use AdventOfCode\Common\Animate\Easing;
 use AdventOfCode\Common\Animate\Stage;
+use AdventOfCode\Common\Animate\Utils\Easing;
 use AdventOfCode\Common\Output\Image\Color;
 use AdventOfCode\Common\Output\Image\Stroke;
 use AdventOfCode\Common\Output\TextOutput;
@@ -256,20 +257,23 @@ class Day15 extends AbstractSolution
         }
 
         $stage = new Stage(
-            width: count($map[0]),
+            width: count($map[0]) - 2,
             height: count($map),
             backgroundColor: Color::hex('#ccc'),
             outputPathFormat: $this->getOutputPath("%'.04d-%'.05d.png"),
             scale: 10,
             fps: 4
         );
+        $group = new Group();
+        $group->transform()->offset->x = -10;
         foreach ($boxes as $box) {
-            $stage->add($box);
+            $group->add($box);
         }
         foreach ($walls as $wall) {
-            $stage->add($wall);
+            $group->add($wall);
         }
-        $stage->add($robot);
+        $group->add($robot);
+        $stage->add($group);
 
         $stage->renderStep(1); // Initial state frame
 
@@ -373,6 +377,7 @@ class Day15 extends AbstractSolution
             }
             if (!$move) {
                 $this->wallHump($stage, $robot, [$dirX, $dirY]);
+                die;
             } else {
                 $stage->renderStep();
             }

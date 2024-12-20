@@ -16,7 +16,7 @@ class Image
         public readonly int $height,
         ?Color $background = null,
     ) {
-        $this->image = imagecreate($width, $height);
+        $this->image = imagecreatetruecolor($width, $height);
         $this->rect(0, 0, $width, $height, $background ?? Color::rgb(0,0,0));
     }
 
@@ -48,10 +48,17 @@ class Image
     protected function getGdColor(Color $color): int
     {
         if (!isset($this->colors[(string) $color])) {
-            $this->colors[(string) $color] = imagecolorallocate($this->image, $color->r, $color->g, $color->b);
-            if ($this->colors[(string) $color] === false) {
-                dump('nooo');
+            if ($color->a < 1) {
+                $alpha = (int) ((1 - $color->a) * 127);
+                dump($alpha);
+                $gdColor = imagecolorallocatealpha($this->image, $color->r, $color->g, $color->b, $alpha);
+            } else {
+                $gdColor = imagecolorallocate($this->image, $color->r, $color->g, $color->b);
             }
+            if ($gdColor === false) {
+                throw new \RuntimeException("Invalid color '$color' requested");
+            }
+            $this->colors[(string) $color] = $gdColor;
         }
         return $this->colors[(string) $color];
     }
