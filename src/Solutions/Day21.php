@@ -7,6 +7,8 @@ use AdventOfCode\Common\Solution\AbstractSolution;
 class Day21 extends AbstractSolution
 {
     protected array $movementMatrix;
+    protected int $maxLevel;
+    protected array $cache = [];
 
     public static array $dirs = [
         '^' => [0, -1],
@@ -17,14 +19,25 @@ class Day21 extends AbstractSolution
 
     protected function solvePart1(): int
     {
+        return $this->calculate(2);
+    }
+
+    protected function solvePart2(): int
+    {
+        return $this->calculate(25);
+    }
+
+    protected function calculate(int $numDirRobots): int
+    {
         $this->createMovementMatrix();
+        $this->maxLevel = $numDirRobots;
 
         $total = 0;
         foreach ($this->getInputLines() as $code) {
             $current = 'A';
             $length = 0;
             foreach (str_split($code) as $targetBtn) {
-                $length += $this->handleButtonPress($current, $targetBtn);
+                $length += $this->handleButtonPress($current, $targetBtn, $this->maxLevel);
                 $current = $targetBtn;
             }
             $total += substr($code, 0, -1) * $length;
@@ -32,11 +45,14 @@ class Day21 extends AbstractSolution
         return $total;
     }
 
-    protected function handleButtonPress(int|string $srcBtn, int|string $targetBtn, int $level = 2): int
+    protected function handleButtonPress(int|string $srcBtn, int|string $targetBtn, int $level): int
     {
-        $movementMatrix = $this->movementMatrix[$level === 2 ? 'num' : 'dir'];
+        $movementMatrix = $this->movementMatrix[$level === $this->maxLevel ? 'num' : 'dir'];
         if ($level === 0) {
             return count($movementMatrix[$srcBtn][$targetBtn][0]);
+        }
+        if (isset($this->cache[$level][$srcBtn][$targetBtn])) {
+            return $this->cache[$level][$srcBtn][$targetBtn];
         }
         $min = PHP_INT_MAX;
         foreach ($movementMatrix[$srcBtn][$targetBtn] as $moves) {
@@ -48,12 +64,8 @@ class Day21 extends AbstractSolution
             }
             $min = min($steps, $min);
         }
+        $this->cache[$level][$srcBtn][$targetBtn] = $min;
         return $min;
-    }
-
-    protected function solvePart2(): int
-    {
-        return ':(';
     }
 
     protected function createMovementMatrix(): void
