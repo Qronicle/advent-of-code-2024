@@ -6,6 +6,9 @@ use AdventOfCode\Common\Solution\AbstractSolution;
 
 class Day17 extends AbstractSolution
 {
+    protected Computer $computer;
+    protected array $program;
+
     protected function solvePart1(): string
     {
         [$computer, $program] = $this->parseInput();
@@ -15,18 +18,27 @@ class Day17 extends AbstractSolution
 
     protected function solvePart2(): int
     {
-        [$computer, $program] = $this->parseInput();
-        $expectedOutput = implode(',', $program);
-        $a = 0;
-        while (++$a) {
-            $computer->a = $a;
-            $computer->b = 0;
-            $computer->c = 0;
-            $computer->run($program);
-            if (implode(',', $computer->output) === $expectedOutput) {
-                return $a;
+        [$this->computer, $this->program] = $this->parseInput();
+        return $this->findA();
+    }
+
+    protected function findA($a = 0, $n = 1): false|int
+    {
+        if ($n > count($this->program)) {
+            return $a;
+        }
+        for ($i = 0; $i < 8; $i++) {
+            $nextA = $a << 3 | $i; // shift three bits to the left and add (max 3) $i bits
+            $this->computer->reset($nextA);
+            $this->computer->run($this->program);
+            $out = $this->computer->output;
+            if ($out == array_slice($this->program, -$n)) {
+                if (($result = $this->findA($nextA, $n + 1)) !== false) {
+                    return $result;
+                }
             }
         }
+        return false;
     }
 
     /**
@@ -53,6 +65,14 @@ class Computer
         public int $b,
         public int $c,
     ) {
+    }
+
+    public function reset(int $a): void
+    {
+        $this->a = $a;
+        $this->b = 0;
+        $this->c = 0;
+        $this->output = [];
     }
 
     /**
