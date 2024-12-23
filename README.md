@@ -26,7 +26,8 @@
 | 20        | 0.01112 sec<br>1.77 MB  | 2.71477 sec<br>1.77 MB    | 2.72589 sec<br>3.54 MB    |
 | 21        | 0.00018 sec<br>0.08 MB  | 0.00066 sec<br>0.13 MB    | 0.00084 sec<br>0.21 MB    |
 | 22        | 0.99805 sec<br>0.10 MB  | 2.71073 sec<br>260.83 MB  | 3.70878 sec<br>260.93 MB  |
-| **TOTAL** | 2.57833 sec<br>15.70 MB | 10.93972 sec<br>307.44 MB | 13.51805 sec<br>323.14 MB |
+| 23        | 0.03001 sec<br>3.90 MB  | 0.05178 sec<br>0.76 MB    | 0.08179 sec<br>4.66 MB    |
+| **TOTAL** | 2.60834 sec<br>19.60 MB | 10.99150 sec<br>308.20 MB | 13.59984 sec<br>327.80 MB |
 
 ## Usage
 
@@ -41,12 +42,19 @@ bin/console run 5.1
 ```
 This will run day 5 part 1 using the `var/input/raw/day05.txt` file as input
 
-### Running a solution with a test file
+#### Running a solution with a test file
 ```
 bin/console run 11.2 test
 ```
 This will run day 11 part 2 using the `var/input/variations/day11-test.txt` file as input.
 Note that 'test' can be any string, as long as an input file exists for that day, with that suffix.
+
+#### Running a custom solution method
+```
+bin/console run 15.animate test
+```
+This will run the `animate` method of the day 15 solution class. Input can still be specified as before.
+Note that the referenced method must be public.
 
 ### Creating a solution class for a specific day
 ```
