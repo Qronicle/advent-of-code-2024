@@ -87,12 +87,4 @@ class Day23 extends AbstractSolution
         return $set;
 
     }
-
-// algorithm BronKerbosch1(R, P, X) is
-//    if P and X are both empty then
-//        report R as a maximal clique
-//    for each vertex v in P do
-//        BronKerbosch1(R ⋃ {v}, P ⋂ N(v), X ⋂ N(v))
-//        P := P \ {v}
-//        X := X ⋃ {v}
 }
