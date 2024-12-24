@@ -85,6 +85,5 @@ class Day23 extends AbstractSolution
         }
 
         return $set;
-
     }
 }
